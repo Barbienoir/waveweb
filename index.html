@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveWeb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="carte">
+        <div class="carte-header">
+            <p class="ic-left"><i class="fa-solid fa-gear"></i></p>
+            </div>
+        <div class="somme">
+            <div class="SM">
+                <h1 id="solde"></h1>
+                <i class="fa-regular fa-eye" id="eye" onclick="changer()"></i>
+            </div>
+            <div class="carte-w">
+                <div id="qrcode"></div>
+                <p class="scanner-text"><i class="fa-solid fa-qrcode"></i> Scanner</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="services container mt-4">
+        <div class="card-group">
+            <div class="card service" data-bs-toggle="modal" data-bs-target="#transfertModal">
+                <i class="bi bi-person-bounding-box fw-bold fs-1 text-primary"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Transfert</h5>
+                </div>
+            </div>
+            <div class="card service" data-bs-toggle="modal" data-bs-target="#depotModal">
+                <i class="bi bi-bank fs-1 text-primary"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Dépôt</h5>
+                </div>
+            </div>
+            <div class="card service" data-bs-toggle="modal" data-bs-target="#retraitModal">
+                <i class="bi bi-cash-stack fs-1 text-primary"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Retrait</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="transfertModal" tabindex="-1" aria-labelledby="transfertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transfertModalLabel">Transfert d'argent</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="transfertForm">
+                        <div class="mb-3">
+                            <label for="destinataireNom" class="form-label">Nom du destinataire</label>
+                            <input type="text" class="form-control" id="destinataireNom">
+                        </div>
+                        <div class="mb-3">
+                            <label for="destinatairePrenom" class="form-label">Prénom du destinataire</label>
+                            <input type="text" class="form-control" id="destinatairePrenom">
+                        </div>
+                        <div class="mb-3">
+                            <label for="montantTransfert" class="form-label">Montant du transfert</label>
+                            <input type="number" class="form-control" id="montantTransfert" min="1" required>
+                        </div>
+                        <p class="text-muted">Frais (1%): <span id="fraisTransfert">0.00</span> FCFA</p>
+                        <p class="fw-bold">Total à débiter: <span id="totalTransfert">0.00</span> FCFA</p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="depotModal" tabindex="-1" aria-labelledby="depotModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="depotModalLabel">Dépôt d'argent</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="depotForm">
+                        <div class="mb-3">
+                            <label for="montantDepot" class="form-label">Montant à déposer</label>
+                            <input type="number" class="form-control" id="montantDepot" min="1" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Déposer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="retraitModal" tabindex="-1" aria-labelledby="retraitModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="retraitModalLabel">Retrait d'argent</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="retraitForm">
+                        <div class="mb-3">
+                            <label for="montantRetrait" class="form-label">Montant à retirer</label>
+                            <input type="number" class="form-control" id="montantRetrait" min="1" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary">Retirer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4">
+        <div class="history-header d-flex justify-content-between align-items-center mb-3 ms-2">
+            <h2 class="text-start mb-0">Historique</h2> <div class="d-flex align-items-center">
+                <i class="fa-solid fa-magnifying-glass me-3" id="searchIcon"></i> <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+        </div>
+        
+        <div class="search-container mb-3" style="display:none;">
+            <input type="text" id="historySearchInput" class="form-control" placeholder="Rechercher un transfert par nom...">
+        </div>
+
+        <ul class="list-group list-group-flush custom-history-list" id="historiqueList">
+        </ul>
+        <div class="text-center mt-3" id="loadMoreContainer">
+            <button class="btn btn-outline-primary" id="loadMoreBtn">Voir plus</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="alertModalBody">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="insufficientFundsModal" tabindex="-1" aria-labelledby="insufficientFundsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="insufficientFundsModalLabel">Erreur de transaction</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Montant insuffisant pour effectuer cette opération.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

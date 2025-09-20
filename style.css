@@ -1,0 +1,252 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.carte{
+    background-color:#4749CD;
+    width: 100vw;
+    /* Ajustements pour la taille de la carte */
+    min-height: 280px; /* Hauteur minimale fixe */
+    height: 40vh; /* Hauteur proportionnelle à la vue, max 40vh */
+    max-height: 450px; /* Hauteur maximale pour les grands écrans */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    position: relative;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.carte-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 15px;
+    padding: 0 20px;
+    /* ic-right est enlevé de cette section car l'icône de recherche est déplacée */
+}
+
+.ic-left, .ic-right { /* .ic-right peut être supprimé si non utilisé ailleurs */
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    margin: 0;
+}
+.ic-left { left: 20px; }
+
+
+.somme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+#solde{
+    color: white;
+    text-align: center;
+    font-size: clamp(2em, 8vw, 2.8em); /* Taille de police responsive */
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.SM{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.SM i{
+    cursor: pointer;
+    color: white;
+    font-size: clamp(1.2em, 4vw, 1.5em); /* Taille de l'icône responsive */
+}
+.carte-w{
+    background-color: #1AB3E5;
+    width: clamp(150px, 40vw, 250px); /* Ajuster la taille min/max du QR */
+    height: clamp(150px, 40vw, 250px);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    z-index: 1;
+    margin-top: 15px; /* Petit espace sous le solde */
+}
+
+#qrcode {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.scanner-text {
+    color: white;
+    font-size: clamp(0.7em, 2.5vw, 0.9em);
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.scanner-text i {
+    font-size: 1em;
+}
+
+.services{
+    width: 90vw;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+}
+.card-group .card {
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+    margin: 0 7px;
+    border: none;
+}
+.card-group .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+.service {
+    padding: 20px 15px;
+    text-align: center;
+    background-color: white;
+}
+.service i {
+    margin-bottom: 12px;
+    color: #4749CD !important;
+}
+.service h5 {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* Historique des opérations */
+.history-header {
+    display: flex; /* S'assurer que c'est un flex container */
+    justify-content: space-between;
+    align-items: center;
+}
+.history-header .fa-magnifying-glass {
+    font-size: 20px; /* Taille de l'icône de recherche */
+    color: #4749CD; /* Couleur pour qu'elle ressorte */
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+.history-header .fa-magnifying-glass:hover {
+    color: #5a5cd0;
+}
+.history-header .fa-chevron-right {
+    font-size: 0.9em;
+}
+
+.search-container {
+    padding: 0 10px;
+}
+
+.custom-history-list {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    padding: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.custom-history-list .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.custom-history-list .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.custom-history-list .transaction-details {
+    flex-grow: 1;
+}
+
+.custom-history-list .transaction-type {
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-history-list .transaction-date {
+    font-size: 0.85em;
+    color: #6c757d;
+}
+
+.custom-history-list .transaction-amount {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.transaction-amount.deposit {
+    color: #28a745;
+}
+
+.transaction-amount.withdrawal, .transaction-amount.transfer {
+    color: #dc3545;
+}
+
+#loadMoreBtn {
+    border-color: #4749CD;
+    color: #4749CD;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+#loadMoreBtn:hover {
+    background-color: #4749CD;
+    color: white;
+}
+#loadMoreBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* Ajustements pour les modals Bootstrap */
+.modal-header {
+    background-color: #4749CD;
+    color: white;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+.modal-header .btn-close {
+    filter: invert(1);
+}
+.modal-footer .btn-primary {
+    background-color: #4749CD;
+    border-color: #4749CD;
+}
+.modal-footer .btn-primary:hover {
+    background-color: #5a5cd0;
+    border-color: #5a5cd0;
+}
